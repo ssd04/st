@@ -2,10 +2,14 @@
 # See LICENSE file for copyright and license details.
 .POSIX:
 
+.DEFAULT_GOAL := all
+
 include config.mk
 
 SRC = st.c x.c hb.c
 OBJ = $(SRC:.c=.o)
+
+.PHONY: all options clean dist install uninstall
 
 all: options st
 
@@ -55,4 +59,10 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 
-.PHONY: all options clean dist install uninstall
+
+# ################################
+# Manage setup
+# ################################
+
+xconfig-reload:
+	xrdb ~/.Xresources
